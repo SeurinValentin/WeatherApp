@@ -135,7 +135,7 @@ margin-right: 10px;
 .right-container-data-box {
     flex: 12;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin: 30px;
 }
 
@@ -144,7 +144,7 @@ margin-right: 10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 500px;
+    width: 560px;
     height: 95px;
 }
 
@@ -185,8 +185,84 @@ margin-right: 10px;
 
 .right-container-todays-highlight {
     flex: 3;
-    background-color:darkblue;
     display: flex;
     flex-direction: column;
+}
 
+.right-container-todays-highlight-title {
+    flex: 2;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: small;
+    font-weight: bold;
+}
+
+.right-container-todays-highlight-cards {
+    flex: 8;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-container-todays-highlight-card{
+    display: flex;
+    flex-direction: column;
+    background-color: #ffff;
+    border-radius: 10px;
+    width: 150px;
+    height: 120px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+
+.gauge {
+    flex: 2;
+    width: 50%;
+    max-width: 180px;
+    font-size: 32px;
+    color: #004033;
+    font-weight: 500;
+}
+
+.gauge__body {
+    width: 100%;
+    height: 0;
+    padding-bottom: 50%;
+    background: #d8d8d8;
+    position: relative    ;
+    border-top-left-radius: 100% 200%;
+    border-top-right-radius: 100% 200%;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.gauge__fill{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    background: #ffbf5e;
+    transform-origin: center top;
+    transform: rotate(0.25turn);
+    transition: transform 0.2 ease-out;
+}
+.gauge__cover{
+    width: 75%;
+    height: 150%;
+    background: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 25%;
+    box-sizing: border-box;
+    color: #ffffff;
 }
