@@ -1,9 +1,10 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-right-container',
   standalone: true,
-  imports: [],
+  imports: [NgIf],
   templateUrl: './right-container.component.html',
   styleUrl: './right-container.component.css',
 })
