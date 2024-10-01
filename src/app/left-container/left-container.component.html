@@ -12,17 +12,33 @@
   </div>
   <div class="left-container-data-box">
     <div class="left-container-temp-data">
-      <div class="left-container-temp-img"><img src="" alt="" /></div>
+      <div class="left-container-temp-img">
+        <img src="/assets/weather_logo.jpg" alt="" />
+      </div>
       <div class="left-container-temp-value">12<sup>°C</sup></div>
-      <div class="left-container-day-time">Monday,16:00</div>
+      <div class="left-container-day-time">
+        Monday,
+        <span class="time">16:00</span>
+      </div>
     </div>
     <div class="dividing-line"></div>
     <div class="left-container-other-detail"></div>
     <div class="left-container-temp-summary">
       <div class="left-container-temp-summary-phrase-img">
-        <fa-icon class="fa-xs" [icon]="faMagnifyingGlass"></fa-icon>
+        <fa-icon class="fa-xs" [icon]="faCloud"></fa-icon>
         <div class="left-containertemp-summary-value">Mostly Cloudy</div>
-        <div class="left-container-rain-stats"></div>
+        <div class="left-container-rain-stats">
+          <div class="left-container-rain-stats-img">
+            <fa-icon class="fa-xs" [icon]="faCloudRain"></fa-icon>
+          </div>
+          <div class="left-container-rain-stats-value">Rain - 30%</div>
+          <div class="left-container-location-details">
+            <div class="left-container-location-img">
+              <img src="assets/rain_image.jpg" alt="" />
+            </div>
+            <div class="left-container-location-name">Pune, India</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
