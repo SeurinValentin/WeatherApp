@@ -191,7 +191,8 @@ margin-right: 10px;
 
 .right-container-todays-highlight-title {
     flex: 2;
-    margin-top: 30px;
+    margin-top: 10px;
+    padding: 10px;
     font-size: small;
     font-weight: bold;
 }
@@ -203,7 +204,8 @@ margin-right: 10px;
     justify-content: center;
     align-items: center;
     max-width: 560px;
-    margin-top: -30px;
+    margin-top: 0px;
+    flex-wrap: wrap;
 }
 
 .right-container-todays-highlight-card{
@@ -217,6 +219,7 @@ margin-right: 10px;
     text-align: center;
     align-items: center;
     margin-left: 5px;
+    margin-bottom: 3px;
 }
 
 
@@ -246,6 +249,7 @@ margin-right: 10px;
     top: 100%;
     left: 0;
     width: inherit;
+    height: 100%;
     background: #ffbf5e;
     transform-origin: center top;
     transform: rotate(0.25turn);
@@ -280,4 +284,91 @@ margin-right: 10px;
 
 .right-container-todays-highlight-value {
     flex: 1;
+}
+
+.wind-status-value {
+    flex: 2;
+}
+
+.wind-status-logo{
+    flex: 1;
+    font-size: 64px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.wind-status-logo img{
+    width: 30px;
+    height: 30px;
+}
+
+.wind-speed-value{
+    font-weight: bold;
+    margin-bottom: -25px;
+    font-size: 20px;
+}
+.unit{
+    font-weight: 400;
+    font-size: 16px;
+}
+.sunrise-sunset-value {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+}
+
+.sunrise{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+.sunrise img{
+    flex: 1;
+    width: 25px;
+    height: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+.sunrise-time{
+    flex: 4 ;
+    font-weight: 500;
+
+}
+.sunset{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+.sunset img {
+    flex: 1;
+    width: 25px;
+    height: 25px;
+}
+.sunset-time {
+    flex: 2;
+    font-weight: 500;
+}
+
+.wind-status-value {
+    font-weight: 500;
+    font-size: 22px;
+    font-weight: bold;
+}
+.wind-status-value sup{
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.humidity-summary {
+    font-size: small;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.unit-last {
+    font-weight: 400;
+    font-size: 16px;
+    margin-left: 5px;
 }
