@@ -1,5 +1,5 @@
-export interface TodayData {
-  time: string;
-  summaryImage: string;
-  temperature: number;
+export class TodayData {
+  time!: string;
+  summaryImage!: string;
+  temperature!: number;
 }

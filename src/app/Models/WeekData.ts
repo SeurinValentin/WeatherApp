@@ -1,6 +1,7 @@
 export interface WeekData {
-  day: string;
-  summaryImage: string;
-  tempMax: string;
-  tempMin: string;
+  day: string | undefined;
+  summaryImage: string | undefined;
+  tempMax: string | undefined;
+  tempMin: string | undefined;
+  push: string | undefined;
 }

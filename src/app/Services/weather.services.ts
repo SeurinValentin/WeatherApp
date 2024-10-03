@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { LocationDetails } from '../Models/locationDetails';
 import {
   V3WxObservationsCurrent,
@@ -14,44 +14,100 @@ import { EnvironmentVariables } from '../Environment/EnvironmentVariables';
 @Injectable({
   providedIn: 'root',
 })
-export class WeatherService {
+export class WeatherService implements OnInit {
   locationDetails?: LocationDetails;
   weatherDetails?: WeatherDetails;
-  temperatureData!: TemperatureData;
-  todayData?: TodayData;
-  weekData?: WeekData;
+  temperatureData?: TemperatureData;
+  todayData?: TodayData[] = [];
+  weekData?: WeekData[] = [];
   todaysHighlight?: TodaysHighlight;
   cityName: string = 'Montlieu';
   language: string = 'en-US';
   date: string = '20200622';
   units: string = 'm';
 
-  fillTemperatureDataModel!: () => {};
-
   currentTime: Date = new Date();
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient) {}
+  ngOnInit(): void {
     this.getData();
+    this.fillTemperatureDataModel();
+  }
+  fillTemperatureDataModel() {
+    console.log('toto');
+    if (!this.weatherDetails) return;
+    this.currentTime = new Date();
+    this.temperatureData!.day =
+      this.weatherDetails['v3-wx-observations-current'].dayOfWeek;
+    this.temperatureData!.time = `${String(
+      this.currentTime.getHours()
+    ).padStart(2, '0')}:${String(this.currentTime.getMinutes()).padStart(
+      2,
+      '0'
+    )}`;
+    this.temperatureData!.temperature =
+      this.weatherDetails['v3-wx-observations-current'].temperature;
+    this.temperatureData!.location =
+      '${this.locationDetails.location.city[0]},${this.locationDetails.location.country}';
+    this.temperatureData!.rainPercent =
+      this.weatherDetails['v3-wx-observations-current'].precip24Hour;
+    this.temperatureData!.summaryPhrase =
+      this.weatherDetails['v3-wx-observations-current'].wxPhraseShort;
+    console.log(this.temperatureData);
+  }
+
+  fillWeekData() {
+    let weekCount = 0;
+    const forecast = this.weatherDetails?.['v3-wx-forecast-daily-15day'];
+
+    while (weekCount < 7) {
+      const dayData = new WeekData();
+      dayData.day = forecast?.dayOfWeek[weekCount]?.slice(0, 3);
+      dayData.tempMax =
+        forecast?.calendarDayTemperatureMax[weekCount]?.toString();
+      dayData.tempMin =
+        forecast?.calendarDayTemperatureMin[weekCount]?.toString();
+      dayData.summaryImage = this.getSummaryImage(
+        forecast!.narrative[weekCount]
+      );
+
+      this.weekData?.push(dayData);
+      weekCount++;
+    }
+  }
+
+  private readonly FORECAST_HOURS = 7;
+
+  fillTodayData() {
+    if (
+      !this.weatherDetails ||
+      !this.weatherDetails['v3-wx-forecast-hourly-10day']
+    ) {
+      console.error('Weather data is not available');
+      return;
+    }
+
+    const forecast = this.weatherDetails['v3-wx-forecast-hourly-10day'];
+
+    (this.todayData as any) = Array.from(
+      { length: this.FORECAST_HOURS },
+      (_, index) => ({
+        time: forecast.validTimeLocal[index]?.slice(11, 16) || '',
+        temperature: forecast.temperature[index] || null,
+        summaryImage: this.getSummaryImage(forecast.wxPhraseShort[index]),
+      })
+    );
   }
 
   prepareData(): void {
-    if (!this.weatherDetails) return;
-    this.currentTime = new Date();
-    this.temperatureData.day =
-      this.weatherDetails['v3-wx-observations-current'].dayOfWeek;
-    this.temperatureData.time = `${String(this.currentTime.getHours()).padStart(
-      2,
-      '0'
-    )}:${String(this.currentTime.getMinutes()).padStart(2, '0')}`;
-    this.temperatureData.temperature =
-      this.weatherDetails['v3-wx-observations-current'].temperature;
-    this.temperatureData.location =
-      '${this.locationDetails.location.city[0]},${this.locationDetails.location.country}';
-    this.temperatureData.rainPercent =
-      this.weatherDetails['v3-wx-observations-current'].precip24Hour;
-    this.temperatureData.summaryPhrase =
-      this.weatherDetails['v3-wx-observations-current'].wxPhraseShort;
+    this.fillTemperatureDataModel();
+    this.fillWeekData();
+    this.fillTodayData();
+    console.log(this.temperatureData);
+    console.log(this.weekData);
+    console.log(this.todayData);
   }
-  fillTemperatureDataModell() {
+
+  fillTemperatureDataModelz() {
     throw new Error('Method not implemented.');
   }
   getSummaryImage(summaryPhrase: string): string {
@@ -161,6 +217,6 @@ export class WeatherService {
     });
   }
 }
-function getSummaryImage(summary: any, string: any) {
+function getSummaryImage(_summary: any, _string: any) {
   throw new Error('Function not implemented.');
 }

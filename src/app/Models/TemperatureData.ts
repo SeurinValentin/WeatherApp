@@ -6,5 +6,5 @@ export interface TemperatureData {
   summaryPhrase: string;
   rainPercent: number;
   location: string;
-  summary: string;
+  temperatureData: number;
 }
