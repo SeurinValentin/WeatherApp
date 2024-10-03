@@ -102,9 +102,6 @@ export class WeatherService implements OnInit {
     this.fillTemperatureDataModel();
     this.fillWeekData();
     this.fillTodayData();
-    console.log(this.temperatureData);
-    console.log(this.weekData);
-    console.log(this.todayData);
   }
 
   fillTemperatureDataModelz() {
@@ -218,5 +215,33 @@ export class WeatherService implements OnInit {
   }
 }
 function getSummaryImage(_summary: any, _string: any) {
+  throw new Error('Function not implemented.');
+}
+function updateTodaysHighlight(weatherDetails: { [x: string]: any }) {
+  try {
+    const current = weatherDetails['v3-wx-observations-current'];
+    const airQuality = weatherDetails['v3-wx-globalAirQuality'];
+
+    if (!current || !airQuality) {
+      throw new Error('Données météorologiques manquantes');
+    }
+
+    return {
+      airQuality: airQuality.globalAirQuality?.airQualityIndex ?? 'N/A',
+      humidity: current.humidity ?? 'N/A',
+      precipitation24Hour: current.precip24Hour ?? 'N/A',
+      sunrise: current.sunriseTimeLocal ?? 'N/A',
+      sunset: current.sunsetTimeLocal ?? 'N/A',
+      uvIndex: current.uvIndex ?? 'N/A',
+      visibility: current.visibility ?? 'N/A',
+      windStatus: current.windSpeed ?? 'N/A',
+    };
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour des highlights:', error);
+    return null;
+  }
+}
+
+function fillTodaysHighlight() {
   throw new Error('Function not implemented.');
 }
