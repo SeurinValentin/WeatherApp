@@ -5,6 +5,7 @@ import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { faFaceSmile } from '@fortawesome/free-solid-svg-icons';
 import { faFaceFrown } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-right-container',
   standalone: true,

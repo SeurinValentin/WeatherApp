@@ -1,4 +1,4 @@
-export interface WeekData {
+export class WeekData {
   day: string | undefined;
   summaryImage: string | undefined;
   tempMax: string | undefined;
