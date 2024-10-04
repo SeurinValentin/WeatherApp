@@ -25,6 +25,10 @@ export class WeatherService implements OnInit {
   language: string = 'en-US';
   date: string = '20200622';
   units: string = 'm';
+  today: boolean = false;
+  week: boolean = true;
+  celsius: boolean = true;
+  fahrenheit: boolean = false;
 
   currentTime: Date = new Date();
   constructor(private httpClient: HttpClient) {}
@@ -33,7 +37,6 @@ export class WeatherService implements OnInit {
     this.fillTemperatureDataModel();
   }
   fillTemperatureDataModel() {
-    console.log('toto');
     if (!this.weatherDetails) return;
     this.currentTime = new Date();
     this.temperatureData!.day =
@@ -52,7 +55,6 @@ export class WeatherService implements OnInit {
       this.weatherDetails['v3-wx-observations-current'].precip24Hour;
     this.temperatureData!.summaryPhrase =
       this.weatherDetails['v3-wx-observations-current'].wxPhraseShort;
-    console.log(this.temperatureData);
   }
 
   fillWeekData() {
@@ -133,7 +135,6 @@ export class WeatherService implements OnInit {
       }
     );
   }
-
   getWeatherReport(
     date: string,
     latitude: number,
